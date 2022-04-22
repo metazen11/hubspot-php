@@ -8,7 +8,6 @@
 
 # Files
 composer.phar
-composer.lock
 test.php
 .phpintel
 /nbproject
