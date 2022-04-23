@@ -41,7 +41,8 @@ if (!empty($_POST)) { //if the form is submitted
  
 			
 		);
-	
+
+	$email = $_POST['email'];
 	//TODO remove once you add attribution data
 	/*$contactInfo2 = array(
 		'firstname' => $_POST['first-name'],
@@ -57,7 +58,7 @@ if (!empty($_POST)) { //if the form is submitted
 	);*/
 	print_r($contactInfo);
 
-	$contact = $hubspot->contacts()->create($contactInfo);
+	$contact = $hubspot->contacts()->createOrUpdate($email,$contactInfo);
 
 	$Message = "Thank You! <BR> I will get back to you soon.";
 
