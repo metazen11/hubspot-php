@@ -2,11 +2,14 @@
 include "vendor/autoload.php";
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Contacts;
-$Message = "Send Me A Message";
 //Quick form to show usage of html, css, javascript, php and api integration to Hubspot API by Mauricio Zuniga
 //Uses Google Tag Manager to bring in Hubspot Tracking Code and Google Analytics as many clients I have worked with use both
-//Uses Customized attribution fields for advanced tracking capabilities to utilize parsable fields outside of Hubspots campaign field
-//Due to time constraint does not use MVC or Framework such as Laravel but does integrate into Hubspot API.
+//Uses customized attribution fields for advanced tracking capabilities; can utilize parsable fields outside of Hubspot/Google tracking
+//Due to time constraint does not use MVC Framework (such as Laravel) but does use hubspot-php wrapper.  
+//I have been working on SQL/Python mostly for last few years for Data Viz, automation, API Integrations etc.
+//Demo Uses application based CI/CD pipeline
+
+$Message = "Send Me A Message"; // Default Message
 
 if (!empty($_POST)) { //if the form is submitted
 	//init
