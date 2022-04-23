@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Contact V17</title>
+	<title>Welcome to Mauricio's Test</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+	<script src="js/form-validation.js"></script>
+
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
@@ -43,12 +47,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form class="contact100-form validate-form">
+			<form name="registration" class="contact100-form validate-form">
 				<span class="contact100-form-title">
-					Send Us A Message
+					Send Me A Message
 				</span>
 
-				<label class="label-input100" for="first-name">Tell us your name *</label>
+				<label class="label-input100" for="first-name">Please tell me your name *</label>
 				<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name">
 					<input id="first-name" class="input100" type="text" name="first-name" placeholder="First name">
 					<span class="focus-input100"></span>
@@ -80,14 +84,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<button class="contact100-form-btn">
 						Send Message
 					</button>
+					<!-- hidden attribution fields -->
+					<input id="cCampaign" name="cCampaign" class="input100" type="hidden"  placeholder="">
+					<input id="cMedium" name="cCampaign" class="input100" type="hidden"  placeholder="">
+					<input id="cSource" name="cCampaign" class="input100" type="hidden"  placeholder="">
+					<input id="cContent" name="cCampaign" class="input100" type="hidden"  placeholder="">
 				</div>
 			</form>
 
-			<div class="contact100-more flex-col-c-m" style="background-image: url('images/bg-01.jpg');">
+			<div class="contact100-more flex-col-c-m" style="background-image: url('images/bg-02.jpg');">
 				<div class="flex-w size1 p-b-47">
+					
 					<div class="txt1 p-r-25">
 						<span class="lnr lnr-map-marker"></span>
 					</div>
+				
 
 					<div class="flex-col size2">
 						<span class="txt1 p-b-20">
@@ -95,7 +106,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 						</span>
 
 						<span class="txt2">
-							Mada Center 8th floor, 379 Hudson St, New York, NY 10018 US
+							<a target=”_blank” href="http://maps.google.com/maps?&z=10&q=Moda Center 8th floor, 379 Hudson St, New York, NY 10018">Moda Center 8th floor, 379 Hudson St, New York, NY 10018 US</a>
+							
 						</span>
 					</div>
 				</div>
@@ -111,7 +123,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 						</span>
 
 						<span class="txt3">
-							+1 800 1236879
+						<a href="tel:503-583-8697">503-583-8697</a>
 						</span>
 					</div>
 				</div>
@@ -123,11 +135,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 					<div class="flex-col size2">
 						<span class="txt1 p-b-20">
-							General Support
+							For Technical Inquries
 						</span>
 
 						<span class="txt3">
-							contact@example.com
+							<a href="mailto:mauricio.zuniga.salas@gmail.com">mauricio.zuniga.salas@gmail.com </a>
 						</span>
 					</div>
 				</div>
