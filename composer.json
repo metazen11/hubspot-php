@@ -14,7 +14,8 @@
     "require": {
         "php": ">=7.3",
         "ext-json": "*",
-        "guzzlehttp/guzzle": "^7.3"
+        "guzzlehttp/guzzle": "^7.3",
+        "hubspot/api-client": "^8.1"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.4",

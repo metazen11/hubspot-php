@@ -1,3 +1,68 @@
+<?php error_reporting(1); //quick fix if we don't have warnings for empty utms
+include "vendor/autoload.php";
+use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Contacts;
+$Message = "Send Me A Message";
+//Quick form to show usage of html, css, javascript, php and api integration to Hubspot API by Mauricio Zuniga
+//Uses Google Tag Manager to bring in Hubspot Tracking Code and Google Analytics as many clients I have worked with use both
+//Uses Customized attribution fields for advanced tracking capabilities to utilize parsable fields outside of Hubspots campaign field
+//Due to time constraint does not use MVC or Framework such as Laravel but does integrate into Hubspot API.
+
+if (!empty($_POST)) { //if the form is submitted
+	//init
+	$apiKey = 'a120a51e-dae0-4cb2-804a-29dd16acc0a9';
+	$hubspot = SevenShores\Hubspot\Factory::create($apiKey);
+
+	//get fields
+	echo 'In Form Submission';
+	$contactInfo = array(
+		
+			array(
+				'property' => 'email',
+				'value' => $_POST['email']
+			),
+			array(
+				'property' => 'firstname',
+				'value' => $_POST['first-name']
+			),
+			array(
+				'property' => 'lastname',
+				'value' => $_POST['last-name']
+			),
+			array(
+				'property' => 'phone',
+				'value' => $_POST['phone']
+			),
+			array(
+				'property' => 'message',
+				'value' => $_POST['message']
+			)
+			//TODO - add the attribution data
+ 
+			
+		);
+	
+	//TODO remove once you add attribution data
+	/*$contactInfo2 = array(
+		'firstname' => $_POST['first-name'],
+		'lastname' => $_POST['last-name'],
+		'email' => $_POST['email'],
+		'phone' => $_POST['phone'],
+		'message' => $_POST['message'], 
+		'campaign' => $_POST['ccampaign'],
+		'ccampaign' => $_POST['ccampaign'],
+		'cmedium' => $_POST['cmedium'],
+		'csource' => $_POST['csource'],
+		'ccontent' => $_POST['ccontent']
+	);*/
+	print_r($contactInfo);
+
+	$contact = $hubspot->contacts()->create($contactInfo);
+
+	$Message = "Thank You! <BR> I will get back to you soon.";
+
+} 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +71,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 	<script src="js/form-validation.js"></script>
 
 <!--===============================================================================================-->
@@ -47,9 +113,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form name="registration" class="contact100-form validate-form">
+			<form name="registration" class="contact100-form validate-form" method="post">
 				<span class="contact100-form-title">
-					Send Me A Message
+					<?php echo $Message;?>
 				</span>
 
 				<label class="label-input100" for="first-name">Please tell me your name *</label>
@@ -76,7 +142,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 				<label class="label-input100" for="message">Message *</label>
 				<div class="wrap-input100 validate-input" data-validate = "Message is required">
-					<textarea id="message" class="input100" name="message" placeholder="Write us a message"></textarea>
+					<textarea id="message" class="input100" name="message" placeholder="Please send me a message"></textarea>
 					<span class="focus-input100"></span>
 				</div>
 
@@ -85,14 +151,54 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 						Send Message
 					</button>
 					<!-- hidden attribution fields -->
-					<input id="cCampaign" name="cCampaign" class="input100" type="hidden"  placeholder="">
-					<input id="cMedium" name="cCampaign" class="input100" type="hidden"  placeholder="">
-					<input id="cSource" name="cCampaign" class="input100" type="hidden"  placeholder="">
-					<input id="cContent" name="cCampaign" class="input100" type="hidden"  placeholder="">
+					<input id="cMedium" name="cCampaign" class="input100" type="hidden"  value="<?php echo htmlspecialchars($_GET['utm_campaign']); ?>" placeholder="">
+					<input id="cSource" name="cSource" class="input100" type="hidden"  value="<?php echo htmlspecialchars($_GET['utm_source']); ?>" placeholder="">
+					<input id="cMedium" name="cMedium" class="input100" type="hidden" value="<?php echo htmlspecialchars($_GET['utm_medium']); ?>" placeholder="">
+					<input id="cContent" name="cContent" class="input100" type="hidden" value="<?php echo htmlspecialchars($_GET['utm_content']); ?>" placeholder="">
 				</div>
 			</form>
 
 			<div class="contact100-more flex-col-c-m" style="background-image: url('images/bg-02.jpg');">
+				
+
+				
+
+				<div class="dis-flex size1 p-b-47">
+					<div class="txt1 p-r-25">
+						<span class="lnr lnr-envelope"></span>
+					</div>
+
+					<div class="flex-col size2">
+						<span class="txt1 p-b-20">
+							For Technical Inquries
+						</span>
+
+						<span class="txt3">
+							<a href="mailto:mauricio.zuniga.salas@gmail.com">mauricio.zuniga.salas@gmail.com </a>
+						</span>
+					</div>
+				</div>
+
+				
+				<div class="dis-flex size1 p-b-47">
+					<div class="txt1 p-r-25">
+						<span class="lnr lnr-phone-handset"></span>
+					</div>
+
+					<div class="flex-col size2">
+						<span class="txt1 p-b-20">
+							Lets Talk
+						</span>
+
+						<span class="txt3">
+						<a href="tel:503-583-8697">503-583-8697</a>
+						</span>
+					</div>
+				</div>
+				
+				
+				
+				
 				<div class="flex-w size1 p-b-47">
 					
 					<div class="txt1 p-r-25">
@@ -112,37 +218,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					</div>
 				</div>
 
-				<div class="dis-flex size1 p-b-47">
-					<div class="txt1 p-r-25">
-						<span class="lnr lnr-phone-handset"></span>
-					</div>
 
-					<div class="flex-col size2">
-						<span class="txt1 p-b-20">
-							Lets Talk
-						</span>
 
-						<span class="txt3">
-						<a href="tel:503-583-8697">503-583-8697</a>
-						</span>
-					</div>
-				</div>
-
-				<div class="dis-flex size1 p-b-47">
-					<div class="txt1 p-r-25">
-						<span class="lnr lnr-envelope"></span>
-					</div>
-
-					<div class="flex-col size2">
-						<span class="txt1 p-b-20">
-							For Technical Inquries
-						</span>
-
-						<span class="txt3">
-							<a href="mailto:mauricio.zuniga.salas@gmail.com">mauricio.zuniga.salas@gmail.com </a>
-						</span>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
