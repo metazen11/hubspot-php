@@ -48,7 +48,14 @@ if ($formSubmitted and $passedValidation) { //if the form is submitted
 
 			//get fields
 			//echo 'In Form Submission';
-			$contactInfo = array(
+			$contactInfo = array();
+			foreach($_POST as $key => $value) {
+				$item = array('property' => $key, 'value' => $_POST[$key]); 
+				array_push($contactInfo, $item); 
+			}		
+			print_r($contactInfo);
+			/*
+			$contactInfo3 = array(
 				
 					array(
 						'property' => 'email',
@@ -69,30 +76,34 @@ if ($formSubmitted and $passedValidation) { //if the form is submitted
 					array(
 						'property' => 'message',
 						'value' => $_POST['message']
+					),
+					array(
+						'property' => 'ccampaign',
+						'value' => $_POST['ccampaign']
+					),
+					array(
+						'property' => 'csource',
+						'value' => $_POST['csource']
+					),
+					array(
+						'property' => 'cmedium',
+						'value' => $_POST['cmedium']
+					),
+					array(
+						'property' => 'ccontent',
+						'value' => $_POST['ccontent']
+					),					,
+					array( //hubspot campaign
+						'property' => 'campaign',
+						'value' => $_POST['utm_campaign']
 					)
-					//TODO - add the attribution data
 		
-					
-				);
-
+					//leaving rest of utm fields out as I do not have time to figure out mapping at the moment				
+				);*/
+			
 			$email = $_POST['email'];
-			//TODO remove once you add attribution data
-			/*$contactInfo2 = array(
-				'firstname' => $_POST['first-name'],
-				'lastname' => $_POST['last-name'],
-				'email' => $_POST['email'],
-				'phone' => $_POST['phone'],
-				'message' => $_POST['message'], 
-				'campaign' => $_POST['ccampaign'],
-				'ccampaign' => $_POST['ccampaign'],
-				'cmedium' => $_POST['cmedium'],
-				'csource' => $_POST['csource'],
-				'ccontent' => $_POST['ccontent']
-			);*/
-			print_r($contactInfo);
-
+			//print_r($contactInfo);
 			$contact = $hubspot->contacts()->createOrUpdate($email,$contactInfo);
-
 			$Message = "Thank You! <BR> I will get back to you soon.";
 } 
 ?>
@@ -201,11 +212,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<button class="contact100-form-btn">
 						Send Message
 					</button>
-					<!-- hidden attribution fields -->
-					<input id="cMedium" name="cCampaign" class="input100" type="hidden"  value="<?php echo htmlspecialchars($_GET['utm_campaign']); ?>" placeholder="">
-					<input id="cSource" name="cSource" class="input100" type="hidden"  value="<?php echo htmlspecialchars($_GET['utm_source']); ?>" placeholder="">
-					<input id="cMedium" name="cMedium" class="input100" type="hidden" value="<?php echo htmlspecialchars($_GET['utm_medium']); ?>" placeholder="">
-					<input id="cContent" name="cContent" class="input100" type="hidden" value="<?php echo htmlspecialchars($_GET['utm_content']); ?>" placeholder="">
+					<!-- hidden attribution fields --- Not currently used due to mapping and time constraings -->
+					<!--
+					<input id="campaign" name="campaign" class="input100" type="hidden"  value="<?php echo htmlspecialchars($_GET['utm_campaign']); ?>" placeholder="">
+					<input id="source" name="source" class="input100" type="hidden"  value="<?php echo htmlspecialchars($_GET['utm_source']); ?>" placeholder="">
+					<input id="medium" name="medium" class="input100" type="hidden"  value="<?php echo htmlspecialchars($_GET['utm_medium']); ?>" placeholder="">
+					<input id="content" name="content" class="input100" type="hidden"  value="<?php echo htmlspecialchars($_GET['utm_content']); ?>" placehol.der="">
+					<input id="term" name="term" class="input100" type="hidden"  value="<?php echo htmlspecialchars($_GET['utm_term']); ?>" placeholder="">
+					-->
+					<!-- custom for advanced parsing and tracking -->
+					<input id="cCampaign" name="cCampaign" class="input100" type="hidden"  value="<?php echo htmlspecialchars($_GET['ccampaign']); ?>" placeholder="">
+					<input id="cSource" name="cSource" class="input100" type="hidden"  value="<?php echo htmlspecialchars($_GET['csource']); ?>" placeholder="">
+					<input id="cMedium" name="cMedium" class="input100" type="hidden" value="<?php echo htmlspecialchars($_GET['cmedium']); ?>" placeholder="">
+					<input id="cContent" name="cContent" class="input100" type="hidden" value="<?php echo htmlspecialchars($_GET['ccontent']); ?>" placeholder="">
 				</div>
 			</form>
 
