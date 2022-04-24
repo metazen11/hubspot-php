@@ -43,7 +43,7 @@ if ($formSubmitted){
 
 if ($formSubmitted and $passedValidation) { //if the form is submitted
 
-			$apiKey = getenv('HSKEY'); echo $apiKey;
+			$apiKey = getenv('HSKEY'); 
 			$hubspot = SevenShores\Hubspot\Factory::create($apiKey);
 
 			//get fields
