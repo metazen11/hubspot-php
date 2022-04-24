@@ -18,7 +18,7 @@ $(function() {
         },
         message: "required",
         phone: {
-            required: true,
+            
             phoneUS: true
           }
        
@@ -28,7 +28,7 @@ $(function() {
         firstname: "Please enter your firstname",
         lastname: "Please enter your lastname",
         email: "Please enter a valid email address",
-        phone: "Please enter a valid phone",
+        phone: "Please enter a valid US phone 123-123-1234 or just leave blank",
         message: "Please enter a message"
 
       },

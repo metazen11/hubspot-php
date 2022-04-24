@@ -518,5 +518,9 @@ textarea.input100 {
   }
 }
 
+.error {
+  color: red;
+}
+
 
 
