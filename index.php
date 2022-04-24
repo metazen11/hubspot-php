@@ -304,10 +304,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		});
 	</script>
 <!--===============================================================================================-->
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="assets/daterangepicker/moment.min.js"></script>
+	<script src="assets/daterangepicker/daterangepicker.js"></script>
 <!--===============================================================================================-->
-	<script src="vendor/countdowntime/countdowntime.js"></script>
+	<script src="assets/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
