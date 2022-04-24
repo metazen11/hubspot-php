@@ -29,7 +29,7 @@ $(function() {
         lastname: "Please enter your lastname",
         email: "Please enter a valid email address",
         phone: "Please enter a valid phone",
-        message: "Please enter a message",
+        message: "Please enter a message"
 
       },
       // Make sure the form is submitted to the destination defined
