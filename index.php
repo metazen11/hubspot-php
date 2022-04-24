@@ -53,53 +53,6 @@ if ($formSubmitted and $passedValidation) { //if the form is submitted
 				$item = array('property' => $key, 'value' => $_POST[$key]); 
 				array_push($contactInfo, $item); 
 			}		
-			print_r($contactInfo);
-			/*
-			$contactInfo3 = array(
-				
-					array(
-						'property' => 'email',
-						'value' => $_POST['email']
-					),
-					array(
-						'property' => 'firstname',
-						'value' => $_POST['firstname']
-					),
-					array(
-						'property' => 'lastname',
-						'value' => $_POST['lastname']
-					),
-					array(
-						'property' => 'phone',
-						'value' => $_POST['phone']
-					),
-					array(
-						'property' => 'message',
-						'value' => $_POST['message']
-					),
-					array(
-						'property' => 'ccampaign',
-						'value' => $_POST['ccampaign']
-					),
-					array(
-						'property' => 'csource',
-						'value' => $_POST['csource']
-					),
-					array(
-						'property' => 'cmedium',
-						'value' => $_POST['cmedium']
-					),
-					array(
-						'property' => 'ccontent',
-						'value' => $_POST['ccontent']
-					),					,
-					array( //hubspot campaign
-						'property' => 'campaign',
-						'value' => $_POST['utm_campaign']
-					)
-		
-					//leaving rest of utm fields out as I do not have time to figure out mapping at the moment				
-				);*/
 			
 			$email = $_POST['email'];
 			//print_r($contactInfo);
@@ -113,29 +66,23 @@ if ($formSubmitted and $passedValidation) { //if the form is submitted
 	<title>Welcome to Mauricio's Test</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-   <!-- ✅ FIRST - load jquery ✅ -->
-   <script
+	<script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
-
-    <!-- ✅ SECOND - load jquery validate ✅ -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
       integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-
-    <!-- ✅ THIRD - load additional methods ✅ -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"
       integrity="sha512-XZEy8UQ9rngkxQVugAdOuBRDmJ5N4vCuNXCh8KlniZgDKTvf7zl75QBtaVG1lEhMFe2a2DuA22nZYY+qsI2/xA=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-
 	<script src="js/form-validation.js"></script>
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
