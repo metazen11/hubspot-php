@@ -11,60 +11,89 @@ use SevenShores\Hubspot\Resources\Contacts;
 
 $Message = "Send Me A Message"; // Default Message
 
-if (!empty($_POST)) { //if the form is submitted
-	//init
-	$apiKey = 'a120a51e-dae0-4cb2-804a-29dd16acc0a9';
-	$hubspot = SevenShores\Hubspot\Factory::create($apiKey);
+$formSubmitted = !empty($_POST);
+$passedValidation = false;
+$invalidCount = 0;
 
-	//get fields
-	echo 'In Form Submission';
-	$contactInfo = array(
+if ($formSubmitted) { //php check variable validation and some sanitization
+	if (empty($_POST["firstname"])) {
+		$Message =  "Name is required";
+		$invalidCount = $invalidCount + 1;
+	}
+	if (empty($_POST["message"])) {
+		$Message = "Message is Required";
+		$invalidCount = $invalidCount + 1;
+	}
+	if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+		$Message = "Invalid email format";
+		$invalidCount = $invalidCount + 1;
+	}
+	//simple sanitization for security
+	foreach($_POST as $key => $value) { 
+		$_POST[$key] = strip_tags($value);
+		//echo $_POST[$key];
+	}
+}
+
+if ($formSubmitted){
+	if ($invalidCount == 0){ //if there were no issues then it passed validation
+		$passedValidation = true;
+	}
+}
+
+if ($formSubmitted and $passedValidation) { //if the form is submitted
+
+			$apiKey = getenv('HSKEY'); echo $apiKey;
+			$hubspot = SevenShores\Hubspot\Factory::create($apiKey);
+
+			//get fields
+			//echo 'In Form Submission';
+			$contactInfo = array(
+				
+					array(
+						'property' => 'email',
+						'value' => $_POST['email']
+					),
+					array(
+						'property' => 'firstname',
+						'value' => $_POST['firstname']
+					),
+					array(
+						'property' => 'lastname',
+						'value' => $_POST['lastname']
+					),
+					array(
+						'property' => 'phone',
+						'value' => $_POST['phone']
+					),
+					array(
+						'property' => 'message',
+						'value' => $_POST['message']
+					)
+					//TODO - add the attribution data
 		
-			array(
-				'property' => 'email',
-				'value' => $_POST['email']
-			),
-			array(
-				'property' => 'firstname',
-				'value' => $_POST['first-name']
-			),
-			array(
-				'property' => 'lastname',
-				'value' => $_POST['last-name']
-			),
-			array(
-				'property' => 'phone',
-				'value' => $_POST['phone']
-			),
-			array(
-				'property' => 'message',
-				'value' => $_POST['message']
-			)
-			//TODO - add the attribution data
- 
-			
-		);
+					
+				);
 
-	$email = $_POST['email'];
-	//TODO remove once you add attribution data
-	/*$contactInfo2 = array(
-		'firstname' => $_POST['first-name'],
-		'lastname' => $_POST['last-name'],
-		'email' => $_POST['email'],
-		'phone' => $_POST['phone'],
-		'message' => $_POST['message'], 
-		'campaign' => $_POST['ccampaign'],
-		'ccampaign' => $_POST['ccampaign'],
-		'cmedium' => $_POST['cmedium'],
-		'csource' => $_POST['csource'],
-		'ccontent' => $_POST['ccontent']
-	);*/
-	print_r($contactInfo);
+			$email = $_POST['email'];
+			//TODO remove once you add attribution data
+			/*$contactInfo2 = array(
+				'firstname' => $_POST['first-name'],
+				'lastname' => $_POST['last-name'],
+				'email' => $_POST['email'],
+				'phone' => $_POST['phone'],
+				'message' => $_POST['message'], 
+				'campaign' => $_POST['ccampaign'],
+				'ccampaign' => $_POST['ccampaign'],
+				'cmedium' => $_POST['cmedium'],
+				'csource' => $_POST['csource'],
+				'ccontent' => $_POST['ccontent']
+			);*/
+			print_r($contactInfo);
 
-	$contact = $hubspot->contacts()->createOrUpdate($email,$contactInfo);
+			$contact = $hubspot->contacts()->createOrUpdate($email,$contactInfo);
 
-	$Message = "Thank You! <BR> I will get back to you soon.";
-
+			$Message = "Thank You! <BR> I will get back to you soon.";
 } 
 ?>
 <!DOCTYPE html>
@@ -77,7 +106,6 @@ if (!empty($_POST)) { //if the form is submitted
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 	<script src="js/form-validation.js"></script>
-
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
@@ -107,7 +135,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-TB3K9VQ');</script>
 <!-- End Google Tag Manager -->
-
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -122,13 +149,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<?php echo $Message;?>
 				</span>
 
-				<label class="label-input100" for="first-name">Please tell me your name *</label>
+				<label class="label-input100" for="firstname">Please tell me your name *</label>
 				<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name">
-					<input id="first-name" class="input100" type="text" name="first-name" placeholder="First name">
+					<input id="firstname" class="input100" type="text" name="firstname" placeholder="First name">
 					<span class="focus-input100"></span>
 				</div>
 				<div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name">
-					<input class="input100" type="text" name="last-name" placeholder="Last name">
+					<input class="input100" type="text" name="lastname" placeholder="Last name">
 					<span class="focus-input100"></span>
 				</div>
 
@@ -200,9 +227,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					</div>
 				</div>
 				
-				
-				
-				
 				<div class="flex-w size1 p-b-47">
 					
 					<div class="txt1 p-r-25">
@@ -221,9 +245,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 						</span>
 					</div>
 				</div>
-
-
-
 			</div>
 		</div>
 	</div>
@@ -231,7 +252,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 	<div id="dropDownSelect1"></div>
-
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -260,7 +280,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
 	  gtag('js', new Date());
-
 	  gtag('config', 'UA-23581568-13');
 	</script>
 </body>

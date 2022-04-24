@@ -11,8 +11,8 @@ composer.phar
 test.php
 .phpintel
 /nbproject
-
+.env
+.htaccess
 .php_cs-fixer
 .php-cs-fixer.cache
-
 .phpunit.result.cache
