@@ -1,4 +1,4 @@
-<?php error_reporting(1); //quick fix if we don't have warnings for empty utms
+<?php error_reporting(1);
 include "vendor/autoload.php";
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Contacts;
@@ -222,13 +222,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 					<div class="flex-col size2">
 						<span class="txt1 p-b-20">
-							Address
+							Github
 						</span>
 
 						<span class="txt2">
-							<a target=”_blank” href="http://maps.google.com/maps?&z=10&q=Moda Center 8th floor, 379 Hudson St, New York, NY 10018">Moda Center 8th floor, 379 Hudson St, New York, NY 10018 US</a>
+							<a target=”_blank” href="https://github.com/metazen11">https://github.com/metazen11</a>
 							
 						</span>
+						<div class="flex-col size2">
+						
 					</div>
 				</div>
 			</div>
