@@ -63,7 +63,7 @@ if ($formSubmitted and $passedValidation) { //if the form is submitted
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Welcome to Mauricio's Test</title>
+	<title>Welcome to Mauricio's Info Page</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script
